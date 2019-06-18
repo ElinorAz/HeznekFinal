@@ -1,0 +1,74 @@
+<mat-card class="heznek-card">
+    <mat-card-title class="title">
+      הירשם
+    </mat-card-title>
+    <mat-card-content>
+        <form novalidate [formGroup]="registerForm">
+            <mat-form-field class="field-full-width heznek-input">
+                <input matInput placeholder="תעודת זהות" formControlName="id">
+                <mat-error *ngIf="registerForm.controls['id'].hasError('required')">
+                   תעודת זהות
+                    <strong>הכרחית</strong>
+                </mat-error>
+                <mat-error *ngIf="registerForm.controls['id'].hasError('minlenght')
+                 || registerForm.controls['id'].hasError('maxlenght')">
+                    ת.ז צריכה להיות 9 מספרים
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="field-full-width heznek-input">
+                <input matInput placeholder="שם פרטי" formControlName="firstName">
+                <mat-error *ngIf="registerForm.controls['firstName'].hasError('required')">
+                   שם פרטי
+                    <strong>הכרחי</strong>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="field-full-width heznek-input">
+                <input matInput placeholder="שם משפחה" formControlName="lastName">
+                <mat-error *ngIf="registerForm.controls['lastName'].hasError('required')">
+                    שם משפחה
+                    <strong>הכרחי</strong>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="field-full-width heznek-input">
+                <input matInput placeholder="דואר אלקטרוני" formControlName="email">
+                <mat-error *ngIf="registerForm.controls['email'].hasError('required')">
+                    דואר אלקטרוני
+                    <strong>הכרחי</strong>
+                </mat-error>
+                <mat-error *ngIf="registerForm.controls['email'].hasError('email') && !registerForm.controls['email'].hasError('required')">
+                   הכנס כתובת דוא"ל תקינה
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="field-full-width heznek-input">
+                <input matInput type="password" placeholder="סיסמה" formControlName="password">
+                <mat-error *ngIf="registerForm.controls['password'].hasError('required')">
+                    סיסמה
+                    <strong>הכרחית</strong>
+                </mat-error>
+                <mat-error *ngIf="registerForm.controls['password'].hasError('minlenght')">
+                   סיסמה צריכה להיות לפחות 6 ספרות
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="field-full-width heznek-input">
+                <input matInput type="password" placeholder="סיסמה" formControlName="passwordConfirmation">
+                <mat-error *ngIf="registerForm.controls['passwordConfirmation'].hasError('required')">
+                   אישור הסיסמה
+                    <strong>הכרחי</strong>
+                </mat-error>
+                <mat-error *ngIf="registerForm.controls['passwordConfirmation'].hasError('minlenght')">
+                   סיסמה צריכה להיות לפחות 6 ספרות
+                </mat-error>
+            </mat-form-field>
+            <mat-error *ngIf="isError" class="heznek-error-block">
+                הפעולה נכשלה
+            </mat-error>
+            <div class="button-container">
+                <button mat-button [disabled]="isLoading" class="heznek-button secondary" (click)="login()">התחבר</button>
+                <button mat-button [disabled]="isLoading" class="heznek-button" (click)="register()">
+                    <span *ngIf="!isLoading">הירשם</span>
+                    <mat-spinner *ngIf="isLoading" [diameter]="20" class="spinner"></mat-spinner>
+                </button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

@@ -1,0 +1,43 @@
+<div class="heznek-page-wrapper">
+    <div class="heznek-section-title">הודעה</div>
+    <form novalidate [formGroup]="messageForm">
+        <mat-form-field class="heznek-input field-full-width">
+            <input matInput placeholder="נושא ההודעה" formControlName="topic">
+        </mat-form-field>
+        <mat-form-field class="field-full-width heznek-input heznek-textarea">
+            <textarea matInput placeholder="תוכן ההודעה" matTextareaAutosize matAutosizeMinRows=3 matAutosizeMaxRows=8 formControlName="content"></textarea>
+        </mat-form-field>
+
+        <div class="heznek-section-title small offset-bottom-15">למי לשלוח?</div>
+
+        <div class="heznek-recipients">
+            <div formArrayName="sendtowho" class="grid-item columns-4  d-flex justify-left" *ngFor="let item of formData.controls; let i = index">
+                <mat-checkbox class="ignite-checkbox" [formControlName]="i" [labelPosition]="'before'">
+                    {{userStatuses[i].value}}
+                </mat-checkbox>
+            </div>
+        </div>
+
+        <div class="d-flex justify-center heznek-file-wrap">
+            <div class="heznek-input field-full-width file-input d-flex align-center">
+                <button mat-button class="heznek-button" (click)="file.click()">
+                    <mat-icon>attach_file</mat-icon>
+                </button>
+                <div class="file-data">
+                    <span class="data-header" *ngIf="!fileName">צרף קובץ</span>
+                    <input type="file" formControlName="file" #file hidden (change)="uploadFile($event)" />
+                    <span>{{ fileName }}</span>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+    <div class="button-container">
+        <button mat-button [disabled]="isLoading" class="heznek-button" (click)="save()">
+            <span *ngIf="!isLoading">שלח</span>
+            <mat-spinner *ngIf="isLoading" [diameter]="20" class="spinner"></mat-spinner>
+        </button>
+    </div>
+
+</div>

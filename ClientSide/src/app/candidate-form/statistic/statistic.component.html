@@ -1,0 +1,126 @@
+<div class="heznek-page-wrapper">
+
+    <div class="heznek-section-title">סטטיסטיקות</div>
+
+    <div *ngIf="!isLoading" class="heznek-diagram" style="display: block; width: 1100px; height: 500px;">
+        <canvas baseChart [data]="chartData" style="width: 100%; height: 100%;" [labels]="chartLabels" [chartType]="chartType"></canvas>
+    </div>
+
+    <div class="heznek-statistic-wrap" *ngIf="!isLoading && statistic">
+        <div class="heznek-statistic-row">
+            <div class="heznek-row-title">מלגאים</div>
+            <div class="heznek-row-content">
+                <div class="heznek-statistic-title">מוסד אקדמי</div>
+                <ul>
+                    <li *ngFor="let academicInstitution of statistic.students.academicInstitutions">
+                        <span>{{academicInstitution.value}} {{academicInstitution.key}}</span>
+                    </li>
+                </ul>
+
+                <div class="heznek-statistic-title">ערים</div>
+                <ul>
+                    <li *ngFor="let city of statistic.students.cities">
+                        <span>{{city.key}} {{city.value}}</span>
+                    </li>
+                </ul>
+
+                <div class="heznek-statistic-title">רשימת מלגות</div>
+                <ul>
+                    <li *ngFor="let scholarship of statistic.students.scholarships">
+                        <span>{{scholarship.key}} {{scholarship.value}}</span>
+                    </li>
+                </ul>
+
+
+                <div class="heznek-statistic-title">מין</div>
+                <ul>
+                    <li *ngFor="let sex of statistic.students.sex">
+                        <span>{{getEnumVal(sex.key)}} {{sex.value}}</span>
+                    </li>
+                </ul>
+
+
+                <div class="heznek-statistic-title">תחום הלימודים</div>
+                <ul>
+                    <li *ngFor="let studyField of statistic.students.studyFields">
+                        <span>{{studyField.key}} {{studyField.value}}</span>
+                    </li>
+                </ul>
+
+                <div class="heznek-statistic-title">לקויות למידה</div>
+                <div class="statistic-single-item">{{statistic.students.disabilityLearning}}</div>
+
+                <div class="heznek-statistic-title">מספר סטודנטים שסיימו את שעות ההתנדבות שלהם
+                    </div>
+                <div class="statistic-single-item">{{statistic.students.finishedVolunteerHours}}</div>
+                
+            </div>
+        </div>
+
+        <div class="heznek-statistic-row">
+            <div class="heznek-row-title">מועמדים פעילים</div>
+            <div class="heznek-row-content">
+                    <div class="heznek-statistic-title">מוסד אקדמי</div>
+                    <div class="statistic-single-item">{{statistic.candidates.academicInstitution}}</div>
+
+                    <div class="heznek-statistic-title">ערים</div>
+                    <ul>
+                        <li *ngFor="let cities of statistic.candidates.cities">
+                            <span>{{cities.key}} {{cities.value}}</span>
+                        </li>
+                    </ul>
+
+                    <div class="heznek-statistic-title">מין</div>
+                    <ul>
+                        <li *ngFor="let sex of statistic.candidates.sex">
+                            <span>{{getEnumVal(sex.key)}} {{sex.value}}</span>
+                        </li>
+                    </ul>
+
+                    <div class="heznek-statistic-title">שירות צבאי מלא</div>
+                    <div class="statistic-single-item">{{statistic.candidates.fullMilitary}}</div>
+
+                    <div class="heznek-statistic-title"></div>
+                    <div class="statistic-single-item">{{statistic.candidates.psychometricGrade}}</div>
+
+
+                    <div class="heznek-statistic-title">לקויות למידה</div>
+                    <div class="statistic-single-item">{{statistic.candidates.disabilityLearning}}</div>
+            </div>
+        </div>
+
+        <div class="heznek-statistic-row">
+            <div class="heznek-row-title">מועמדים פעילים + מלגאים</div>
+            <div class="heznek-row-content">
+                    <div class="heznek-statistic-title">מוסד אקדמי</div>
+                    <div class="statistic-single-item">{{statistic.scholarshipCandidates.academicInstitution}}</div>
+
+                    <div class="heznek-statistic-title">ערים</div>
+                    <ul>
+                        <li *ngFor="let city of statistic.scholarshipCandidates.cities">
+                            <span>{{city.key}} {{city.value}}</span>
+                        </li>
+                    </ul>
+
+                    <div class="heznek-statistic-title">מין</div>
+                    <ul>
+                        <li *ngFor="let sex of statistic.scholarshipCandidates.sex">
+                            <span>{{getEnumVal(sex.key)}} {{sex.value}}</span>
+                        </li>
+                    </ul>
+
+                    <div class="heznek-statistic-title">תחום הלימודים</div>
+                    <ul>
+                        <li *ngFor="let studyField of statistic.scholarshipCandidates.studyFields">
+                            <span>{{studyField.key}} {{studyField.value}}</span>
+                        </li>
+                    </ul>
+
+                    <div class="heznek-statistic-title">לקויות למידה</div>
+                    <div class="statistic-single-item">{{statistic.scholarshipCandidates.disabilityLearning}}</div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

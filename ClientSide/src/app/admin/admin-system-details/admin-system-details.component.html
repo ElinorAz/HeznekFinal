@@ -1,0 +1,37 @@
+<div class="heznek-page-wrapper">
+
+    <div class="heznek-section-title">פרטי המנהל במערכת</div>
+    <form novalidate [formGroup]="adminDetailsForm">
+        <div class="grid-item columns-2 d-flex justify-center">
+            <mat-form-field class="heznek-input field-full-width">
+                <input matInput placeholder="תעודת זהות" formControlName="id">
+                <mat-error *ngIf="adminDetailsForm.controls['id'].hasError('minlenght')
+                        || adminDetailsForm.controls['id'].hasError('maxlenght')">
+                   ת.ז צריכה להיות 9 מספרים
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="grid-item columns-2  d-flex justify-center">
+            <mat-form-field class="heznek-input field-full-width">
+                <input matInput placeholder="שם פרטי" formControlName="firstName">
+            </mat-form-field>
+        </div>
+        <div class="grid-item columns-2  d-flex justify-center">
+            <mat-form-field class="heznek-input field-full-width">
+                <input matInput placeholder="שם משפחה" formControlName="lastName">
+            </mat-form-field>
+        </div>
+        <div class="grid-item columns-2  d-flex justify-center">
+            <mat-form-field class="heznek-input field-full-width">
+                <input matInput type="password" placeholder="סיסמה" formControlName="password">
+            </mat-form-field>
+        </div>
+    </form>
+
+    <div class="button-container">
+        <button mat-button [disabled]="isLoading" class="heznek-button" (click)="save()">
+            <span *ngIf="!isLoading">אשר</span>
+            <mat-spinner *ngIf="isLoading" [diameter]="20" class="spinner"></mat-spinner>
+        </button>
+    </div>
+</div>

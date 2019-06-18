@@ -1,0 +1,35 @@
+<mat-toolbar color="primary">
+        <button class="heznek-button-icon" aria-label="Main" (click)="form()" *ngIf="isLogged">
+                <img src="../assets/icons/logo.jpg">
+        </button>
+        <button class="heznek-button-icon" aria-label="Scholarships" (click)="scholarships()" *ngIf="isLogged && isAdmin || isSemiAdmin">
+                מלגות
+        </button>
+
+        <button class="heznek-button-icon" aria-label="Candidates" (click)="candidates()" *ngIf="isLogged && isAdmin || isSemiAdmin">
+                מועמדים
+        </button>
+        <button class="heznek-button-icon" aria-label="Students" (click)="students()" *ngIf="isLogged && isAdmin || isSemiAdmin">
+                סטודנטים מלגאים
+        </button>
+
+        <button class="heznek-button-icon" aria-label="Messages" (click)="messages()" *ngIf="isLogged && isAdmin">
+                שליחת הודעה
+        </button>
+
+
+        <button class="heznek-button-icon" aria-label="Events" (click)="events()" *ngIf="isLogged && (isAdmin || isStudent)">
+                אירועים וכנסים
+        </button>
+
+        <span class="heznek-spacer"></span>
+        <button class="heznek-button-icon" aria-label="Status" (click)="status()" *ngIf="isLogged && !isAdmin && !isStudent">
+                בדיקת סטטוס בקשת מלגה
+        </button>
+        <button class="heznek-button-icon" aria-label="Profile" (click)="profile()" *ngIf="isLogged">
+                <mat-icon>person</mat-icon>
+        </button>
+        <button class="heznek-button-icon" aria-label="Log out" (click)="logout()" *ngIf="isLogged">
+                <mat-icon>logout</mat-icon>
+        </button>
+</mat-toolbar>

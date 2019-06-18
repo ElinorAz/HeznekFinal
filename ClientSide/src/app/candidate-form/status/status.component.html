@@ -1,0 +1,39 @@
+<div class="heznek-page-wrapper">
+  <div class="heznek-section-title">בדיקת סטטוס בקשת מלגה</div>
+  <div class="d-flex justify-center">
+    <mat-spinner *ngIf="isLoading" [diameter]="20" class="spinner"></mat-spinner>
+  </div>
+  <div *ngIf="!isLoading">
+    <div class="heznek-form-status">
+      <div class="heznek-status status-in-progress" [ngClass]="{'active': status === 0 || status === 1 || status === 2}">
+        <div class="heznek-status-name">בתהליך</div>
+        <div class="heznek-status-circle">
+            <img src="../assets/icons/tick.png" class="icon">
+        </div>
+      </div>
+
+      <div class="heznek-status status-in-progress" [ngClass]="{'active': status === 1 || status === 2}">
+        <div class="heznek-status-name">בבדיקה</div>
+        <div class="heznek-status-circle">
+            <img src="../assets/icons/tick.png" class="icon">
+        </div>
+      </div>
+
+      <div>
+        <div class="heznek-status status-in-progress" [ngClass]="{'active': status === 2}">
+          <div class="heznek-status-name">אישור</div>
+          <div class="heznek-status-circle">
+              <img src="../assets/icons/tick.png" class="icon">
+          </div>
+        </div>
+
+        <div class="heznek-status status-in-progress" [ngClass]="{'declined': status === 3 || userStatus == 7}">
+          <div class="heznek-status-name">דחייה</div>
+          <div class="heznek-status-circle ">
+              <img src="../assets/icons/close.png" class="icon show">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

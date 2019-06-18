@@ -1,0 +1,117 @@
+<div class="heznek-page-wrapper">
+
+    <div class="heznek-section-title">תלושי שכר חודשי של ההורים</div>
+    <form novalidate [formGroup]="parentsSalaryForm">
+        <div class="grid-item columns-2  d-flex justify-center">
+            <mat-form-field class="heznek-input field-full-width">
+                <input matInput placeholder="שם האימא" formControlName="motherName">
+            </mat-form-field>
+        </div>
+        <div class="grid-item columns-2  d-flex justify-center">
+            <mat-form-field class="heznek-input field-full-width">
+                <input matInput placeholder="שם האבא" formControlName="fatherName">
+            </mat-form-field>
+        </div>
+
+        <div class="d-flex heznek-salaryParents">
+            <div class="grid-item   d-flex justify-center">
+                <div class="heznek-input field-full-width file-input d-flex align-center center" *ngIf="!isDisabled">
+                    <button mat-button class="heznek-button" (click)="salarySlips.click()">
+                        <mat-icon>attach_file</mat-icon>
+                    </button>
+                    <div class="file-data">
+                        <span class="data-header small">תלושי שכר(שלושה חודשים אחרונים) - צרף כאן את של שני ההורים בקובץ זיפ</span>
+                        <input type="file" formControlName="salarySlips" #salarySlips hidden (change)="uploadSalarySlips($event)" />
+                        <span class="heznek-filename">{{ salarySlipsFileName }}</span>
+                    </div>
+                </div>
+                <div class="file-data" *ngIf="isDisabled && parentsSalary">
+                    <span class="data-header small">תלושי שכר(שלושה חודשים אחרונים) - צרף כאן את של שני ההורים בקובץ זיפ</span>
+                    <a [href]="generateDownloadLink(parentsSalary.salarySlipsDownloadName)" download target="_blank" class="heznek-download-file">
+                        <span class="d-flex">
+                            <mat-icon>attach_file</mat-icon>
+                            <span class="heznek-filename">{{ parentsSalary.salarySlipsFileName }}</span>
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <div>
+
+                <div class="grid-item   d-flex justify-center " *ngIf="!isDisabled">
+                    <div class="heznek-input field-full-width file-input d-flex align-center center">
+                        <button mat-button class="heznek-button" (click)="disability.click()">
+                            <mat-icon>attach_file</mat-icon>
+                        </button>
+                        <div class="file-data">
+                            <span class="data-header small">נכות הורים</span>
+                            <input type="file" formControlName="disability" #disability hidden (change)="uploadDisability($event)" />
+                            <span class="heznek-filename">{{disabilityFileName}}</span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="file-data" *ngIf="isDisabled && parentsSalary">
+                    <span class="data-header small">נכות הורים</span>
+                    <a [href]="generateDownloadLink(parentsSalary.disabilityDownloadName)" download target="_blank" class="heznek-download-file">
+                        <span class="d-flex">
+                            <mat-icon>attach_file</mat-icon>
+                            <span class="heznek-filename">{{ parentsSalary.disabilityFileName }}</span>
+                        </span>
+                    </a>
+                </div>
+
+
+                <div class="grid-item   d-flex justify-center">
+                        <mat-checkbox formControlName="motherDisability" class="offset">אימא</mat-checkbox>
+                    </div>
+            </div>
+
+            <div>
+                <div class="grid-item   d-flex justify-center " *ngIf="!isDisabled">
+                    <div class="heznek-input field-full-width file-input d-flex align-center center">
+                        <button mat-button class="heznek-button" (click)="disability2.click()">
+                            <mat-icon>attach_file</mat-icon>
+                        </button>
+                        <div class="file-data">
+                            <span class="data-header small">נכות הורים</span>
+                            <input type="file" formControlName="disability2" #disability2 hidden (change)="uploadDisabilitySecond($event)" />
+                            <span class="heznek-filename">{{disability2FileName}}</span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="file-data" *ngIf="isDisabled && parentsSalary">
+                    <span class="data-header small">נכות הורים</span>
+                    <a [href]="generateDownloadLink(parentsSalary.disability2DownloadName)" 
+                    download target="_blank" class="heznek-download-file">
+                        <span class="d-flex">
+                            <mat-icon>attach_file</mat-icon>
+                            <span class="heznek-filename">{{ parentsSalary.disability2FileName }}</span>
+                        </span>
+                    </a>
+                </div>
+
+
+                <div class="grid-item   d-flex justify-center">
+                    <mat-checkbox formControlName="fatherDisability" class="offset">אבא</mat-checkbox>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+
+
+    </form>
+
+    <div class="button-container" *ngIf="showBtnApprove">
+        <button mat-button [disabled]="isLoading" class="heznek-button" (click)="save()">
+            <span *ngIf="!isLoading">אישור</span>
+            <mat-spinner *ngIf="isLoading" [diameter]="20" class="spinner"></mat-spinner>
+        </button>
+    </div>
+</div>

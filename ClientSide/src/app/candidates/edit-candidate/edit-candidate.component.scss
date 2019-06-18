@@ -1,0 +1,39 @@
+.button-container {
+    width: max-content;
+    margin: 50px auto 0;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 40px;
+}
+
+.heznek-download-file {
+    color: #333;
+}
+
+.bottom-offset-20 {
+    max-width: 200px;
+    margin: 0 auto 20px;
+    text-align: center;
+}
+
+.disable-wrap {
+    position: relative;
+    &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        opacity: 0.7;
+        cursor: not-allowed;
+        z-index: 10;
+    }
+    
+}
+
+.heznek-download-file  {
+    color: #333;
+    text-decoration: none;
+    font-size: 16px;
+}

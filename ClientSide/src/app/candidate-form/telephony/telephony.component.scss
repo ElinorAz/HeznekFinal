@@ -1,0 +1,98 @@
+.button-container {
+    width: max-content;
+    margin: 50px auto 0;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 40px;
+}
+
+.heznek-section-title {
+    margin-bottom: 20px;
+}
+
+.heznek-telephony-form {
+    font-family: Roboto;
+    text-align: center;
+    max-width: 400px;
+    margin: 0 auto;
+    .telephony-login-label {
+        font-weight: 400;
+        color: #444;
+        margin-right: 10px;
+        text-align: center;
+        margin-bottom: 25px;
+        font-size: 20px;
+        font-weight: 500;
+    }
+    ul {
+        text-align: left;
+        max-width: 400px;
+        margin: 0 auto;
+        list-style: none;
+        li {
+            border-bottom: 1px solid #e6e6e6;
+            padding: 10px;
+            cursor: pointer;
+        }
+    }
+    .heznek-telephony-login {
+        font-size: 18px;
+        color: #3f51b5;
+        font-weight: 400;
+
+    }
+
+    .heznek-telephony-notfound {
+        font-size: 18px;
+        color: #333;
+        font-weight: 500;
+        text-align: center;
+    }
+}
+  
+  .search-full-width {
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+  }
+
+  .heznek-wrap-300 {
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+ul {
+    font-family: Roboto;
+    border: 1px solid #e6e6e6;
+    list-style: none;
+    border-radius: 4px;
+    li {
+        padding: 7px 10px;
+        border-bottom: 1px solid #e6e6e6;
+        color: #222;
+        &:last-child {
+            border: none;
+        }
+    }
+}
+
+.heznek-telephony-events {
+    font-family: Roboto;
+
+    .heznek-latest-event {
+        margin-bottom: 30px;
+        span {
+            color: #777;
+            &.value {
+                font-weight: 500;
+                color: #222;
+                padding: 0 7px;
+            }
+        }
+    }
+}
+
+.heznek-telephony-wrap {
+    padding: 30px 0;
+    display: flex;
+}

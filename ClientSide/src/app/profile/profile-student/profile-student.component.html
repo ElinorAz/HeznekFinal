@@ -1,0 +1,728 @@
+<mat-accordion class="heznek-accordion">
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                פרטים אישיים
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <form novalidate [formGroup]="generalInfoForm">
+            <div class="grid-list-custom">
+                <div class="grid-item columns-2 d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <input matInput placeholder="תעודת זהות" formControlName="id">
+                        <mat-error *ngIf="generalInfoForm.controls['id'].hasError('minlenght')
+                        || generalInfoForm.controls['id'].hasError('maxlenght')">
+                            ת.ז צריכה להיות 9 מספרים
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <input matInput placeholder="טלפון" formControlName="phone">
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <input matInput placeholder="דואר אלקטרוני" formControlName="email">
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <input matInput placeholder="שם פרטי" formControlName="firstName">
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <input matInput placeholder="שם משפחה" formControlName="lastName">
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <input matInput [matDatepicker]="dp3" placeholder="תאריך לידה" formControlName="birthDate" disabled>
+                        <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                        <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <mat-select placeholder="מגדר" formControlName="gender">
+                            <mat-option *ngFor="let gender of genders" [value]="gender.id">
+                                {{gender.value}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <input matInput placeholder="מספר אחים ואחיות" type="number" formControlName="siblings">
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <mat-select placeholder="מספר הורים אקדמאים" formControlName="academicParents">
+                            <mat-option *ngFor="let number of [0,1,2]" [value]="number">{{number}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <mat-select placeholder="עיר" formControlName="city">
+                            <mat-option *ngFor="let city of cities" [value]="city.city">{{city.city}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <input matInput placeholder="כתובת" formControlName="address">
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <mat-select placeholder="סטטוס" formControlName="status">
+                            <mat-option *ngFor="let status of userStatuses" [value]="status.id">{{status.value}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+        </form>
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                שירות צבאי
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <form novalidate [formGroup]="militaryServiceForm">
+            <div class="grid-list-custom">
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="field-full-width heznek-input">
+                        <input matInput placeholder="תפקיד" formControlName="role">
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="field-full-width  heznek-input">
+                        <mat-select placeholder="סוג שירות" formControlName="typeOfService">
+                            <mat-option *ngFor="let service of typeOfServices" [value]="service.id">{{service.value}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <div class="heznek-radio">
+                        <div class="title">הקלות בשירות</div>
+                        <mat-radio-group formControlName="easeOfService" class="heznek-radio-group">
+                            <div class="radios">
+                                <mat-radio-button [value]="true">
+                                    כן
+                                </mat-radio-button>
+                                <mat-radio-button [value]="false">
+                                    לא
+                                </mat-radio-button>
+                            </div>
+                        </mat-radio-group>
+                    </div>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="field-full-width heznek-input heznek-textarea">
+                        <textarea matInput placeholder="פירוט על השירות - אם אין שירות ציין מדוע" matTextareaAutosize matAutosizeMinRows=9 matAutosizeMaxRows=15
+                            formControlName="details"></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+        </form>
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                בית ספר תיכון
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <form novalidate [formGroup]="highSchoolForm">
+            <div class="grid-list-custom">
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <input matInput placeholder="שם בית הספר" formControlName="name">
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <mat-select placeholder="שנת סיום" formControlName="year">
+                            <mat-option *ngFor="let number of [2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050]"
+                                [value]="number">{{number}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+        </form>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                כללי
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <form novalidate [formGroup]="generalForm">
+            <div class="heznek-checkbox-block">
+                <div class="block-question">השתתפות בתוכניות</div>
+                <div class="grid-list-custom align-top">
+                    <div class="grid-item columns-4" formArrayName="participationInPrograms" *ngFor="let item of formData">
+                        <div [formGroup]="item">
+                            <mat-checkbox formControlName="value">
+                                {{item.value.id}}</mat-checkbox>
+                            <mat-form-field *ngIf="item.value.value" class="field-full-width heznek-input heznek-textarea column-textarea">
+                                <textarea matInput placeholder="תאר בקצרה את אופי הפעילות" matTextareaAutosize matAutosizeMinRows=9 matAutosizeMaxRows=15
+                                    formControlName="description"></textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-list-custom">
+                <div class="grid-item  xl-4 lg-6 md-12 d-flex justify-center">
+                    <mat-form-field class="heznek-input field-full-width">
+                        <input matInput placeholder="Psyhometric grade" formControlName="psychometricGrade">
+                    </mat-form-field>
+                </div>
+                <div class="grid-item  xl-4 lg-6 md-12 d-flex justify-center flex-wrap">
+                    <div class="heznek-radio none-margin">
+                        <div class="title">ראויים לקידום</div>
+                        <mat-radio-group formControlName="worthyOfAdvancment" class="heznek-radio-group">
+                            <div class="radios">
+                                <mat-radio-button [value]="true">
+                                    כן
+                                </mat-radio-button>
+                                <mat-radio-button [value]="false">
+                                    לא
+                                </mat-radio-button>
+                            </div>
+                        </mat-radio-group>
+                    </div>
+                    <mat-form-field class="heznek-input field-full-width none-margin" *ngIf="generalForm.controls['worthyOfAdvancment'].value == true">
+                        <input matInput placeholder="מספר נקודות שקיבלת" formControlName="points">
+                    </mat-form-field>
+                </div>
+
+                <!-- <div class="heznek-input" *ngIf="generalForm.controls['worthyOfAdvancment'].value != true" style="height:80px;">         
+                    </div> -->
+                <div class="grid-item  xl-4 lg-6 md-12 d-flex justify-center flex-wrap ">
+                    <div class="heznek-radio none-margin ">
+                        <div class="title">לקויות למידה</div>
+                        <mat-radio-group formControlName="disabilities" class="heznek-radio-group">
+                            <div class="radios">
+                                <mat-radio-button [value]="true">
+                                    כן
+                                </mat-radio-button>
+                                <mat-radio-button [value]="false">
+                                    לא
+                                </mat-radio-button>
+                            </div>
+                        </mat-radio-group>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!--<div class="heznek-input" style="height:40px;">         
+                </div>-->
+        <form novalidate [formGroup]="additionalForm">
+            <div class="grid-list-custom">
+                <div class="grid-item  xl-4 lg-6 md-12 d-flex justify-center">
+                    <mat-form-field class="field-full-width heznek-input heznek-textarea">
+                        <textarea matInput placeholder="סיבת בקשה למלגה" matTextareaAutosize matAutosizeMinRows=9 matAutosizeMaxRows=15 formControlName="reason"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="grid-item  xl-4 lg-6 md-12 d-flex justify-center">
+                    <mat-form-field class="field-full-width heznek-input heznek-textarea">
+                        <textarea matInput placeholder="קשיים כלליים" matTextareaAutosize matAutosizeMinRows=9 matAutosizeMaxRows=15 formControlName="difficulties"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="grid-item  xl-4 lg-6 md-12 d-flex justify-center">
+                    <mat-form-field class="field-full-width heznek-input heznek-textarea">
+                        <textarea matInput placeholder="מצב כלכלי" matTextareaAutosize matAutosizeMinRows=9 matAutosizeMaxRows=15 formControlName="status"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="grid-item  xl-4 lg-6 md-12 d-flex justify-center">
+                    <mat-form-field class="field-full-width heznek-input heznek-textarea">
+                        <textarea matInput placeholder="סיפור חיים בקווים כלליים" matTextareaAutosize matAutosizeMinRows=9 matAutosizeMaxRows=15
+                            formControlName="lifeStory"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="grid-item  xl-4 lg-6 md-12 d-flex justify-center">
+                    <mat-form-field class="field-full-width heznek-input heznek-textarea">
+                        <textarea matInput placeholder="פרטים על מצב אישי ומשפחתי" matTextareaAutosize matAutosizeMinRows=9 matAutosizeMaxRows=15
+                            formControlName="situationDetails"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="grid-item  xl-4 lg-6 md-12 d-flex justify-center flex-wrap">
+                    <div class="heznek-radio">
+                        <div class="title">בעיות בריאות(שלך או של משפחתך)</div>
+                        <mat-radio-group formControlName="hasHealthProblems" class="heznek-radio-group">
+                            <div class="radios">
+                                <mat-radio-button [value]="true">
+                                    כן
+                                </mat-radio-button>
+                                <mat-radio-button [value]="false">
+                                    לא
+                                </mat-radio-button>
+                            </div>
+                        </mat-radio-group>
+                    </div>
+                    <mat-form-field *ngIf="additionalForm.controls['hasHealthProblems'].value == true" class="field-full-width heznek-input heznek-textarea">
+                        <textarea matInput placeholder="בעיות בריאות(שלך או של משפחתך)" matTextareaAutosize matAutosizeMinRows=9 matAutosizeMaxRows=15
+                            formControlName="healthProblems"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="grid-item  xl-4 lg-6 md-12 d-flex justify-center flex-wrap">
+                    <div class="heznek-radio">
+                        <div class="title">קשיים כלכליים</div>
+                        <mat-radio-group formControlName="hasFinancialProblems" class="heznek-radio-group">
+                            <div class="radios">
+                                <mat-radio-button [value]="true">
+                                    כן
+                                </mat-radio-button>
+                                <mat-radio-button [value]="false">
+                                    לא
+                                </mat-radio-button>
+                            </div>
+                        </mat-radio-group>
+                    </div>
+                    <mat-form-field *ngIf="additionalForm.controls['hasFinancialProblems'].value == true" class="field-full-width heznek-input heznek-textarea">
+                        <textarea matInput placeholder="קשיים כלכליים" matTextareaAutosize matAutosizeMinRows=9 matAutosizeMaxRows=15 formControlName="financialProblems"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="grid-item  xl-4 lg-6 md-12 d-flex justify-center flex-wrap">
+                    <div class="heznek-radio">
+                        <div class="title">קשיים משפחתיים</div>
+                        <mat-radio-group formControlName="hasFamilyDifficulties" class="heznek-radio-group">
+                            <div class="radios">
+                                <mat-radio-button [value]="true">
+                                    כן
+                                </mat-radio-button>
+                                <mat-radio-button [value]="false">
+                                    לא
+                                </mat-radio-button>
+                            </div>
+                        </mat-radio-group>
+                    </div>
+                    <mat-form-field *ngIf="additionalForm.controls['hasFamilyDifficulties'].value == true" class="field-full-width heznek-input heznek-textarea">
+                        <textarea matInput placeholder="קשיים משפחתיים" matTextareaAutosize matAutosizeMinRows=9 matAutosizeMaxRows=15 formControlName="familyDifficulties"></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+        </form>
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                לימודים אקדמאיים
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <form novalidate [formGroup]="academicStudiesForm">
+            <form novalidate [formGroup]="filesForm">
+                <div class="grid-list-custom">
+                    <div class="grid-item columns-2  d-flex justify-center">
+                        <div class="heznek-input field-full-width file-input d-flex align-center">
+                            <button mat-button class="heznek-button" (click)="aproval.click()">
+                                <mat-icon>attach_file</mat-icon>
+                            </button>
+                            <div class="file-data">
+                                <span class="data-header">אישור לימודים לשנה הבאה(אם יש)</span>
+                                <input type="file" formControlName="aproval" #aproval hidden (change)="uploadAproval($event)" />
+                                <span>{{ aprovalFileName }}</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="grid-item columns-2  d-flex justify-center">
+                        <div class="heznek-input field-full-width file-input d-flex align-center">
+                            <button mat-button class="heznek-button" (click)="grades.click()">
+                                <mat-icon>attach_file</mat-icon>
+                            </button>
+                            <div class="file-data">
+                                <span class="data-header">גיליון ציונים לשנה הנוכחית</span>
+                                <input #gradesInput type="file" formControlName="grades" #grades hidden (change)="uploadGrades($event)" />
+                                <span>{{gradesFileName}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="grid-list-custom">
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <input matInput placeholder="שם התואר האקדמי" formControlName="academicDegree">
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <mat-select placeholder="שנת התחלת התואר" formControlName="beginningDegree">
+                            <mat-option *ngFor="let number of [2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050]"
+                                [value]="number">{{number}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <input matInput placeholder="שכר לימוד לשנה הקרובה" formControlName="tuition">
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <div class="heznek-radio">
+                        <div class="title">מימון אחר ללימודים</div>
+                        <mat-radio-group formControlName="otherFundings" class="heznek-radio-group">
+                            <div class="radios">
+                                <mat-radio-button [value]="true">
+                                    כן
+                                </mat-radio-button>
+                                <mat-radio-button [value]="false">
+                                    לא
+                                </mat-radio-button>
+                            </div>
+                        </mat-radio-group>
+                    </div>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="field-full-width heznek-input heznek-textarea">
+                        <textarea matInput placeholder="כיצד אתה מתכנן לממן את הלימודים?" matTextareaAutosize matAutosizeMinRows=9 matAutosizeMaxRows=15
+                            formControlName="fundStudies"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center flex-wrap">
+                    <mat-form-field class="heznek-input">
+                        <mat-select placeholder="שנה בלימודים(ראשונה,שנייה וכו')" formControlName="studyYear">
+                            <mat-option *ngFor="let number of [0,1,2,3,4,5,6]" [value]="number">{{number}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="heznek-input">
+                        <mat-select placeholder="סוג תואר" formControlName="typeOfDegree">
+                            <mat-option *ngFor="let degree of degreeTypes" [value]="degree.id">{{degree.value}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="heznek-input">
+                        <input matInput placeholder="תחום הלימודים" formControlName="fieldOfStudy">
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <input matInput placeholder="מוסד אקדמי" formControlName="academicInstitution">
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <mat-select placeholder="מקום מגורים במהלך הלימודים" formControlName="residence">
+                            <mat-option *ngFor="let residence of residenceTypes" [value]="residence.id">{{residence.value}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <mat-select placeholder="צפי שנת סיום התואר" formControlName="graduationYear">
+                            <mat-option *ngFor="let number of [2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050]"
+                                [value]="number">{{number}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+        </form>
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                פרטי מלגה
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+
+        <div class="heznek-student-scholarships">
+            <table mat-table [dataSource]="studentScholarships" class="mat-elevation-z8 content-table">
+
+                <ng-container matColumnDef="scholarship">
+                    <th mat-header-cell *matHeaderCellDef> שם המגלה </th>
+                    <td mat-cell *matCellDef="let element"> {{element.scholarship.name}} </td>
+                </ng-container>
+                <ng-container matColumnDef="total">
+                    <th mat-header-cell *matHeaderCellDef> סכום שנתי </th>
+                    <td mat-cell *matCellDef="let element"> {{element.total}} </td>
+                </ng-container>
+                <ng-container matColumnDef="currentYear">
+                    <th mat-header-cell *matHeaderCellDef> שנה נוכחית</th>
+                    <td mat-cell *matCellDef="let element"> {{getCurrentYear()}} </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="january">
+                    <th mat-header-cell *matHeaderCellDef> January</th>
+                    <td mat-cell *matCellDef="let element"> {{element.january}} </td>
+                </ng-container>
+                <ng-container matColumnDef="february">
+                    <th mat-header-cell *matHeaderCellDef> February</th>
+                    <td mat-cell *matCellDef="let element"> {{element.february}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="march">
+                    <th mat-header-cell *matHeaderCellDef> March</th>
+                    <td mat-cell *matCellDef="let element"> {{element.march}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="april">
+                    <th mat-header-cell *matHeaderCellDef> April</th>
+                    <td mat-cell *matCellDef="let element"> {{element.april}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="may">
+                    <th mat-header-cell *matHeaderCellDef> May</th>
+                    <td mat-cell *matCellDef="let element"> {{element.may}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="june">
+                    <th mat-header-cell *matHeaderCellDef> June</th>
+                    <td mat-cell *matCellDef="let element"> {{element.june}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="july">
+                    <th mat-header-cell *matHeaderCellDef> July</th>
+                    <td mat-cell *matCellDef="let element"> {{element.july}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="august">
+                    <th mat-header-cell *matHeaderCellDef> August</th>
+                    <td mat-cell *matCellDef="let element"> {{element.august}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="september">
+                    <th mat-header-cell *matHeaderCellDef> September</th>
+                    <td mat-cell *matCellDef="let element"> {{element.september}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="october">
+                    <th mat-header-cell *matHeaderCellDef>October</th>
+                    <td mat-cell *matCellDef="let element"> {{element.october}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="november">
+                    <th mat-header-cell *matHeaderCellDef> November</th>
+                    <td mat-cell *matCellDef="let element"> {{element.november}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="december">
+                    <th mat-header-cell *matHeaderCellDef> December</th>
+                    <td mat-cell *matCellDef="let element"> {{element.december}} </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="givenInPast">
+                    <th mat-header-cell *matHeaderCellDef> האם ניתנה בעבר </th>
+                    <td mat-cell *matCellDef="let element">
+                        <div class="center">
+                            <img *ngIf="element.givenInPast" class="heznek-cheked-icon" src="/assets/icons/checked.png" />
+                        </div>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="studScholrDisplayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: studScholrDisplayedColumns;"></tr>
+            </table>
+        </div>
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                פרטי בנק
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <form novalidate [formGroup]="bankInfoForm">
+            <div class="grid-item columns-2  d-flex justify-center">
+                <mat-form-field class="heznek-input">
+                    <input matInput placeholder="שם הבנק" formControlName="bankName">
+                </mat-form-field>
+            </div>
+            <div class="grid-item columns-2  d-flex justify-center">
+                <mat-form-field class="heznek-input">
+                    <input matInput placeholder="מספר סניף" formControlName="branchNumber">
+                </mat-form-field>
+            </div>
+            <div class="grid-item columns-2  d-flex justify-center">
+                <mat-form-field class="heznek-input">
+                    <input matInput placeholder="מספר חשבון" formControlName="accountNumber">
+                </mat-form-field>
+            </div>
+        </form>
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                פרטי שעות התנדבות
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <form novalidate [formGroup]="volunteerDetails">
+            <div class="heznek-section-title">פרטי התנדבות</div>
+            <div class="grid-list-custom">
+                <div class="grid-item columns-4  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <input matInput placeholder="שעות שנעשו" formControlName="hoursSpent">
+                    </mat-form-field>
+                </div>
+
+                <div class="grid-item columns-4  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <input matInput placeholder="שעות שצריך" formControlName="hours">
+                    </mat-form-field>
+                </div>
+
+                <div class="grid-item columns-4  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <input matInput placeholder="תיאור ההתנדבות" formControlName="contribution">
+                    </mat-form-field>
+                </div>
+            </div>
+        </form>
+
+        <div class="grid-list-custom align-top" *ngIf="!isAddingNewVH">
+            <div class="columns-2">
+                <div class="heznek-section-title">סמסטר א</div>
+                <table mat-table [dataSource]="volunteerHoursSA" class="mat-elevation-z8 content-table">
+                    <ng-container matColumnDef="date">
+                        <th mat-header-cell *matHeaderCellDef> תאריך </th>
+                        <td mat-cell *matCellDef="let element"> {{element.date | date}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="start">
+                        <th mat-header-cell *matHeaderCellDef> שעת התחלה </th>
+                        <td mat-cell *matCellDef="let element"> {{element.start}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="end">
+                        <th mat-header-cell *matHeaderCellDef> שעת סיום </th>
+                        <td mat-cell *matCellDef="let element"> {{element.end}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="activityType">
+                        <th mat-header-cell *matHeaderCellDef> סוג פעילות </th>
+                        <td mat-cell *matCellDef="let element"> {{element.activityType}} </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </div>
+            <div class="columns-2">
+                <div class="heznek-section-title">סמסטר ב</div>
+                <table mat-table [dataSource]="volunteerHoursSB" class="mat-elevation-z8 content-table">
+                    <ng-container matColumnDef="date">
+                        <th mat-header-cell *matHeaderCellDef> תאריך </th>
+                        <td mat-cell *matCellDef="let element"> {{element.date | date}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="start">
+                        <th mat-header-cell *matHeaderCellDef> שעת התחלה </th>
+                        <td mat-cell *matCellDef="let element"> {{element.start}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="end">
+                        <th mat-header-cell *matHeaderCellDef> שעת סיום </th>
+                        <td mat-cell *matCellDef="let element"> {{element.end}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="activityType">
+                        <th mat-header-cell *matHeaderCellDef> סוג פעילות </th>
+                        <td mat-cell *matCellDef="let element"> {{element.activityType}} </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </div>
+            <div class="columns-2">
+                <div class="heznek-section-title">סמסטר קיץ</div>
+                <table mat-table [dataSource]="volunteerHoursSummer" class="mat-elevation-z8 content-table">
+                    <ng-container matColumnDef="date">
+                        <th mat-header-cell *matHeaderCellDef> תאריך </th>
+                        <td mat-cell *matCellDef="let element"> {{element.date | date}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="start">
+                        <th mat-header-cell *matHeaderCellDef> שעת התחלה </th>
+                        <td mat-cell *matCellDef="let element"> {{element.start}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="end">
+                        <th mat-header-cell *matHeaderCellDef> שעת סיום </th>
+                        <td mat-cell *matCellDef="let element"> {{element.end}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="activityType">
+                        <th mat-header-cell *matHeaderCellDef> סוג פעילות </th>
+                        <td mat-cell *matCellDef="let element"> {{element.activityType}} </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </div>
+        </div>
+
+        <form novalidate [formGroup]="volunteerHoursForm" *ngIf="isAddingNewVH">
+            <div class="heznek-section-title">הוסף שעות התנדבות</div>
+            <div class="grid-item columns-2  d-flex justify-center">
+                <mat-form-field class="heznek-input">
+                    <input matInput [matDatepicker]="vh1" placeholder="תאריך" formControlName="date">
+                    <mat-datepicker-toggle matSuffix [for]="vh1"></mat-datepicker-toggle>
+                    <mat-datepicker #vh1 disabled="false"></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div class="grid-item columns-2  d-flex justify-center">
+                <input [ngxTimepicker]="vh2" class="heznek-time-input" [format]="24" placeholder="שעת התחלה" formControlName="start">
+                <ngx-material-timepicker #vh2></ngx-material-timepicker>
+            </div>
+
+
+            <div class="grid-item columns-2  d-flex justify-center">
+                <input [ngxTimepicker]="vh3" class="heznek-time-input" [format]="24" placeholder="שעת סיום" formControlName="end">
+                <ngx-material-timepicker #vh3></ngx-material-timepicker>
+            </div>
+
+            <div class="grid-item columns-2  d-flex justify-center">
+                <mat-form-field class="heznek-input">
+                    <mat-select placeholder="סוג פעילות" formControlName="activityType">
+                        <mat-option *ngFor="let type of volunteerHoursActivityType" [value]="type.id">{{type.value}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="grid-item columns-2  d-flex justify-center">
+                <mat-form-field class="heznek-input">
+                    <mat-select placeholder="סמסטר" formControlName="semester">
+                        <mat-option *ngFor="let semester of semesters" [value]="semester.id">{{semester.value}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+        </form>
+        <div class="d-flex button-wrapper">
+            <div class="button-container">
+                <button mat-button class="heznek-button" (click)="toggleVolunteerHoursState()">
+                    <span *ngIf="!isAddingNewVH">הוסף שעות</span>
+                    <span *ngIf="isAddingNewVH">בטל</span>
+                </button>
+            </div>
+            <div class="button-container" *ngIf="isAddingNewVH">
+                <button mat-button [disabled]="isLoadingVH" class="heznek-button" (click)="addVolunteerHours()">
+                    <span *ngIf="!isLoadingVH">הוסף שעות</span>
+                    <mat-spinner *ngIf="isLoadingVH" [diameter]="20" class="spinner"></mat-spinner>
+                </button>
+            </div>
+        </div>
+
+    </mat-expansion-panel>
+</mat-accordion>
+
+<div class="button-container">
+    <button mat-button [disabled]="isLoading" class="heznek-button" (click)="save()">
+        <span *ngIf="!isLoading">אשר</span>
+        <mat-spinner *ngIf="isLoading" [diameter]="20" class="spinner"></mat-spinner>
+    </button>
+</div>

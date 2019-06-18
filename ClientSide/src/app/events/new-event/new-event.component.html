@@ -1,0 +1,114 @@
+<div class="heznek-page-wrapper">
+
+    <div class="heznek-section-title">אירוע</div>
+    <form novalidate [formGroup]="eventForm" class="heznek-add-event">
+        <div class="grid-item">
+            <mat-form-field class="heznek-input field-full-width">
+                <input matInput placeholder="שם האירוע" formControlName="name">
+            </mat-form-field>
+        </div>
+
+        <div class="grid-item">
+            <mat-form-field class="heznek-input field-full-width">
+                <input matInput placeholder="נושא" formControlName="subject">
+            </mat-form-field>
+        </div>
+
+        <div class="grid-item ">
+            <mat-form-field class="heznek-input field-full-width ">
+                <input matInput [min]="getTodayDate()"  [matDatepicker]="dp1" placeholder="תאריך" formControlName="date" disabled>
+                <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+                <mat-datepicker #dp1 disabled="false"></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+
+        <div class="grid-item">
+            <input [ngxTimepicker]="timepicker" class="heznek-time-input field-full-width" [format]="24" placeholder="שעת התחלה" formControlName="time">
+            <ngx-material-timepicker #timepicker></ngx-material-timepicker>
+        </div>
+
+        <div class="grid-item">
+                <input [ngxTimepicker]="timepickerFinish" class="heznek-time-input field-full-width" 
+                [format]="24" placeholder="שעת סיום" formControlName="finishTime">
+                <ngx-material-timepicker #timepickerFinish></ngx-material-timepicker>
+            </div>
+
+
+        <div class="grid-item">
+            <mat-form-field class="heznek-input field-full-width">
+                <input matInput placeholder="מיקום" formControlName="location">
+            </mat-form-field>
+        </div>
+
+        <div class="grid-item">
+            <mat-form-field class="heznek-input field-full-width">
+                <input matInput placeholder="מספר משתתפים מצופה" type="number" formControlName="expected">
+            </mat-form-field>
+        </div>
+
+        <div class="heznek-section-title small offset-bottom-15">בחר את הקבוצות שברצונך להזמין</div>
+
+        <div class="heznek-recipients">
+            <div formArrayName="participantTypes" class="grid-item columns-4  d-flex justify-left" 
+            *ngFor="let item of formData.controls; let i = index">
+                <mat-checkbox class="ignite-checkbox" [formControlName]="i" [labelPosition]="'before'">
+                    {{userStatuses[i].value}}
+                </mat-checkbox>
+            </div>
+        </div>
+    </form>
+
+    <div *ngIf="eventId !== 0" class="d-flex heznek-events-statuses-wrap">
+        <div>
+            <div class="heznek-section-title">לא אישרו הגעה לאירוע</div>
+            <table mat-table [dataSource]="notAttendingEvents" class="mat-elevation-z8 content-table columns-3">
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef> תעודת זהות </th>
+                    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                </ng-container>
+                <ng-container matColumnDef="firstName">
+                    <th mat-header-cell *matHeaderCellDef> שם פרטי</th>
+                    <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+                </ng-container>
+                <ng-container matColumnDef="lastName">
+                    <th mat-header-cell *matHeaderCellDef> שם משפחה </th>
+                    <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+        </div>
+
+        <div>
+            <div class="heznek-section-title">אישרו הגעה לאירוע</div>
+            <table mat-table [dataSource]="attendingEvents" class="mat-elevation-z8 content-table columns-3">
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef> תעודת זהות </th>
+                    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                </ng-container>
+                <ng-container matColumnDef="firstName">
+                    <th mat-header-cell *matHeaderCellDef> שם פרטי</th>
+                    <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+                </ng-container>
+                <ng-container matColumnDef="lastName">
+                    <th mat-header-cell *matHeaderCellDef> שם משפחה </th>
+                    <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+        </div>
+    </div>
+
+    <div class="button-container">
+        <button mat-button [disabled]="isLoading" class="heznek-button" (click)="save()">
+            <span *ngIf="!isLoading">שמור</span>
+            <mat-spinner *ngIf="isLoading" [diameter]="20" class="spinner"></mat-spinner>
+        </button>
+    </div>
+</div>

@@ -1,0 +1,443 @@
+<mat-accordion class="heznek-accordion">
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                פרטים אישיים
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <form novalidate [formGroup]="generalInfoForm">
+            <div class="grid-list-custom">
+                <div class="grid-item columns-2 d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <input matInput placeholder="תעודת זהות" formControlName="id">
+                        <mat-error *ngIf="generalInfoForm.controls['id'].hasError('minlenght')
+                        || generalInfoForm.controls['id'].hasError('maxlenght')">
+                            ת.ז צריכה להיות 9 מספרים
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <input matInput placeholder="טלפון" formControlName="phone">
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <input matInput placeholder="דואר אלקטרוני" formControlName="email">
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <input matInput placeholder="שם פרטי" formControlName="firstName">
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <input matInput placeholder="שם משפחה" formControlName="lastName">
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <input matInput [matDatepicker]="dp3" placeholder="תאריך לידה" formControlName="birthDate" disabled>
+                        <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                        <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <mat-select placeholder="מין" formControlName="gender">
+                            <mat-option *ngFor="let gender of genders" [value]="gender.id">
+                                {{gender.value}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <input matInput placeholder="מספר אחים ואחיות" type="number" formControlName="siblings">
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <mat-select placeholder="מספר הורים אקדמאים" formControlName="academicParents">
+                            <mat-option *ngFor="let number of [0,1,2]" [value]="number">{{number}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <mat-select placeholder="עיר" formControlName="city">
+                            <mat-option *ngFor="let city of cities" [value]="city.city">{{city.city}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <input matInput placeholder="כתובת" formControlName="address">
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <input matInput placeholder="סטטוס" formControlName="status">
+                    </mat-form-field>
+                </div>
+            </div>
+        </form>
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                    שירות צבאי
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <form novalidate [formGroup]="militaryServiceForm">
+            <div class="grid-list-custom">
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="field-full-width heznek-input">
+                        <input matInput placeholder="תפקיד" formControlName="role">
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="field-full-width  heznek-input">
+                        <mat-select placeholder="סוג שירות" formControlName="typeOfService">
+                            <mat-option *ngFor="let service of typeOfServices" [value]="service.id">{{service.value}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <div class="heznek-radio">
+                        <mat-radio-group formControlName="easeOfService" class="heznek-radio-group">
+                            <div class="radios">
+                                <mat-radio-button [value]="true">
+                                    כן
+                                </mat-radio-button>
+                                <mat-radio-button [value]="false">
+                                    לא
+                                </mat-radio-button>
+                            </div>
+                        </mat-radio-group>
+                        <div class="title">הקלות בשירות</div>
+                    </div>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="field-full-width heznek-input heznek-textarea">
+                        <textarea matInput placeholder="פירוט על השירות - אם אין שירות ציין מדוע" matTextareaAutosize matAutosizeMinRows=9 matAutosizeMaxRows=15
+                            formControlName="details"></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+        </form>
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                בית ספר תיכון
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <form novalidate [formGroup]="highSchoolForm">
+            <div class="grid-list-custom">
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <input matInput placeholder="שם בית הספר" formControlName="name">
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <mat-select placeholder="שנת סיום" formControlName="year">
+                            <mat-option *ngFor="let number of [2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050]"
+                                [value]="number">{{number}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+        </form>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                כללי
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <form novalidate [formGroup]="generalForm">
+            <div class="heznek-checkbox-block">
+                <div class="block-question">השתתפות בתוכניות</div>
+                <div class="grid-list-custom align-top">
+                    <div class="grid-item columns-4" formArrayName="participationInPrograms" *ngFor="let item of formData">
+                        <div [formGroup]="item">
+                            <mat-checkbox formControlName="value">
+                                {{item.value.id}}</mat-checkbox>
+                            <mat-form-field *ngIf="item.value.value" class="field-full-width heznek-input heznek-textarea column-textarea">
+                                <textarea matInput placeholder="תאר בקצרה את אופי הפעילות" matTextareaAutosize matAutosizeMinRows=9 matAutosizeMaxRows=15
+                                    formControlName="description"></textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-list-custom">
+                <div class="grid-item  xl-4 lg-6 md-12 d-flex justify-center">
+                    <mat-form-field class="heznek-input field-full-width">
+                        <input matInput placeholder="ציון פסיכומטרי" formControlName="psychometricGrade">
+                    </mat-form-field>
+                </div>
+                <div class="grid-item  xl-4 lg-6 md-12 d-flex justify-center flex-wrap">
+                    <div class="heznek-radio none-margin">
+                        
+                        <mat-radio-group formControlName="worthyOfAdvancment" class="heznek-radio-group">
+                            <div class="radios">
+                                <mat-radio-button [value]="true">
+                                    כן
+                                </mat-radio-button>
+                                <mat-radio-button [value]="false">
+                                    לא
+                                </mat-radio-button>
+                            </div>
+                        </mat-radio-group>
+                        <div class="title">ראויים לקידום</div>
+                    </div>
+                    <mat-form-field class="heznek-input field-full-width none-margin" *ngIf="generalForm.controls['worthyOfAdvancment'].value == true">
+                        <input matInput placeholder="מספר נקודות שקיבלת" formControlName="points">
+                    </mat-form-field>
+                </div>
+
+                <!-- <div class="heznek-input" *ngIf="generalForm.controls['worthyOfAdvancment'].value != true" style="height:80px;">         
+                    </div> -->
+                <div class="grid-item  xl-4 lg-6 md-12 d-flex justify-center flex-wrap ">
+                    <div class="heznek-radio none-margin ">
+                        
+                        <mat-radio-group formControlName="disabilities" class="heznek-radio-group">
+                            <div class="radios">
+                                <mat-radio-button [value]="true">
+                                    כן
+                                </mat-radio-button>
+                                <mat-radio-button [value]="false">
+                                    לא
+                                </mat-radio-button>
+                            </div>
+                        </mat-radio-group>
+                        <div class="title">לקויות למידה</div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!--<div class="heznek-input" style="height:40px;">         
+                </div>-->
+        <form novalidate [formGroup]="additionalForm">
+            <div class="grid-list-custom">
+                <div class="grid-item  xl-4 lg-6 md-12 d-flex justify-center">
+                    <mat-form-field class="field-full-width heznek-input heznek-textarea">
+                        <textarea matInput placeholder="סיבת בקשה למלגה" matTextareaAutosize matAutosizeMinRows=9 matAutosizeMaxRows=15 formControlName="reason"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="grid-item  xl-4 lg-6 md-12 d-flex justify-center">
+                    <mat-form-field class="field-full-width heznek-input heznek-textarea">
+                        <textarea matInput placeholder="קשיים כלליים" matTextareaAutosize matAutosizeMinRows=9 matAutosizeMaxRows=15 formControlName="difficulties"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="grid-item  xl-4 lg-6 md-12 d-flex justify-center">
+                    <mat-form-field class="field-full-width heznek-input heznek-textarea">
+                        <textarea matInput placeholder="מצב כלכלי" matTextareaAutosize matAutosizeMinRows=9 matAutosizeMaxRows=15 formControlName="status"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="grid-item  xl-4 lg-6 md-12 d-flex justify-center">
+                    <mat-form-field class="field-full-width heznek-input heznek-textarea">
+                        <textarea matInput placeholder="סיפור חיים בקווים כלליים" matTextareaAutosize matAutosizeMinRows=9 matAutosizeMaxRows=15
+                            formControlName="lifeStory"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="grid-item  xl-4 lg-6 md-12 d-flex justify-center">
+                    <mat-form-field class="field-full-width heznek-input heznek-textarea">
+                        <textarea matInput placeholder="פרטים על מצב אישי ומשפחתי" matTextareaAutosize matAutosizeMinRows=9 matAutosizeMaxRows=15
+                            formControlName="situationDetails"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="grid-item  xl-4 lg-6 md-12 d-flex justify-center flex-wrap">
+                    <div class="heznek-radio">
+                        
+                        <mat-radio-group formControlName="hasHealthProblems" class="heznek-radio-group">
+                            <div class="radios">
+                                <mat-radio-button [value]="true">
+                                    כן
+                                </mat-radio-button>
+                                <mat-radio-button [value]="false">
+                                    לא
+                                </mat-radio-button>
+                            </div>
+                        </mat-radio-group>
+                        <div class="title">בעיות בריאות(שלך או של משפחתך)</div>
+                    </div>
+                    <mat-form-field *ngIf="additionalForm.controls['hasHealthProblems'].value == true" class="field-full-width heznek-input heznek-textarea">
+                        <textarea matInput placeholder="בעיות בריאות(שלך או של משפחתך)" matTextareaAutosize matAutosizeMinRows=9 matAutosizeMaxRows=15
+                            formControlName="healthProblems"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="grid-item  xl-4 lg-6 md-12 d-flex justify-center flex-wrap">
+                    <div class="heznek-radio">
+                        
+                        <mat-radio-group formControlName="hasFinancialProblems" class="heznek-radio-group">
+                            <div class="radios">
+                                <mat-radio-button [value]="true">
+                                    כן
+                                </mat-radio-button>
+                                <mat-radio-button [value]="false">
+                                    לא
+                                </mat-radio-button>
+                            </div>
+                        </mat-radio-group>
+                        <div class="title">קשיים כלכליים</div>
+                    </div>
+                    <mat-form-field *ngIf="additionalForm.controls['hasFinancialProblems'].value == true" class="field-full-width heznek-input heznek-textarea">
+                        <textarea matInput placeholder="קשיים כלכליים" matTextareaAutosize matAutosizeMinRows=9 matAutosizeMaxRows=15 formControlName="financialProblems"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="grid-item  xl-4 lg-6 md-12 d-flex justify-center flex-wrap">
+                    <div class="heznek-radio">
+                        
+                        <mat-radio-group formControlName="hasFamilyDifficulties" class="heznek-radio-group">
+                            <div class="radios">
+                                <mat-radio-button [value]="true">
+                                    כן
+                                </mat-radio-button>
+                                <mat-radio-button [value]="false">
+                                    לא
+                                </mat-radio-button>
+                            </div>
+                        </mat-radio-group>
+                        <div class="title">קשיים משפחתיים</div>
+                    </div>
+                    <mat-form-field *ngIf="additionalForm.controls['hasFamilyDifficulties'].value == true" class="field-full-width heznek-input heznek-textarea">
+                        <textarea matInput placeholder="קשיים משפחתיים" matTextareaAutosize matAutosizeMinRows=9 matAutosizeMaxRows=15 formControlName="familyDifficulties"></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+        </form>
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                לימודים אקדמאיים
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <form novalidate [formGroup]="academicStudiesForm">
+            <form novalidate [formGroup]="filesForm">
+                <div class="grid-list-custom">
+                    <div class="grid-item columns-2  d-flex justify-center">
+                        <div class="heznek-input field-full-width file-input d-flex align-center">
+                            <button mat-button class="heznek-button" (click)="aproval.click()">
+                                <mat-icon>attach_file</mat-icon>
+                            </button>
+                            <div class="file-data">
+                                <span class="data-header">אישור לימודים לשנה הבאה(אם יש)</span>
+                                <input type="file" formControlName="aproval" #aproval hidden (change)="uploadAproval($event)" />
+                                <span>{{ aprovalFileName }}</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="grid-item columns-2  d-flex justify-center">
+                        <div class="heznek-input field-full-width file-input d-flex align-center">
+                            <button mat-button class="heznek-button" (click)="grades.click()">
+                                <mat-icon>attach_file</mat-icon>
+                            </button>
+                            <div class="file-data">
+                                <span class="data-header">גיליון ציונים לשנה הנוכחית</span>
+                                <input #gradesInput type="file" formControlName="grades" #grades hidden (change)="uploadGrades($event)" />
+                                <span>{{gradesFileName}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="grid-list-custom">
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <input matInput placeholder="שם התואר האקדמי" formControlName="academicDegree">
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <mat-select placeholder="שנת התחלת התואר" formControlName="beginningDegree">
+                            <mat-option *ngFor="let number of [22009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050]"
+                                [value]="number">{{number}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <input matInput placeholder="שכר לימוד לשנה הקרובה" formControlName="tuition">
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <div class="heznek-radio">
+                        
+                        <mat-radio-group formControlName="otherFundings" class="heznek-radio-group">
+                            <div class="radios">
+                                <mat-radio-button [value]="true">
+                                    כן
+                                </mat-radio-button>
+                                <mat-radio-button [value]="false">
+                                    לא
+                                </mat-radio-button>
+                            </div>
+                        </mat-radio-group>
+                        <div class="title">מימון אחר ללימודים</div>
+                    </div>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="field-full-width heznek-input heznek-textarea">
+                        <textarea matInput placeholder="כיצד אתה מתכנן לממן את הלימודים?" matTextareaAutosize matAutosizeMinRows=9 matAutosizeMaxRows=15
+                            formControlName="fundStudies"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center flex-wrap">
+                    <mat-form-field class="heznek-input">
+                        <mat-select placeholder="שנה בלימודים(ראשונה,שנייה וכו')" formControlName="studyYear">
+                            <mat-option *ngFor="let number of [0,1,2,3,4,5,6]" [value]="number">{{number}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="heznek-input">
+                        <mat-select placeholder="סוג תואר" formControlName="typeOfDegree">
+                            <mat-option *ngFor="let degree of degreeTypes" [value]="degree.id">{{degree.value}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="heznek-input">
+                        <input matInput placeholder="תחום הלימודים" formControlName="fieldOfStudy">
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <input matInput placeholder="מוסד אקדמי" formControlName="academicInstitution">
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <mat-select placeholder="מקום מגורים במהלך הלימודים" formControlName="residence">
+                            <mat-option *ngFor="let residence of residenceTypes" [value]="residence.id">{{residence.value}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="grid-item columns-2  d-flex justify-center">
+                    <mat-form-field class="heznek-input">
+                        <mat-select placeholder="צפי שנת סיום התואר" formControlName="graduationYear">
+                            <mat-option *ngFor="let number of [2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050]" [value]="number">{{number}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+        </form>
+    </mat-expansion-panel>
+</mat-accordion>
+
+<div class="button-container">
+    <button mat-button [disabled]="isLoading" class="heznek-button" (click)="save()">
+        <span *ngIf="!isLoading">אישור</span>
+        <mat-spinner *ngIf="isLoading" [diameter]="20" class="spinner"></mat-spinner>
+    </button>
+</div>

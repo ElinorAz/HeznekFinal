@@ -1,0 +1,55 @@
+.button-container {
+    width: max-content;
+    margin: 50px auto 0;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 40px;
+}
+
+.radios {
+    display: flex;
+    margin: 0;
+    .offset {
+        display: block;
+        margin: 0 20px;
+    }
+}
+
+.field-full-width {
+    &.center {
+        text-align: center;
+        height: auto;
+        width: auto;
+    }
+}
+
+.heznek-salaryParents {
+    max-width: 850px;
+    margin: 20px auto 20px;
+    justify-content: space-between;
+    align-items: start;
+    > div {
+        margin: 0 20px;
+    }
+}
+
+.heznek-filename {
+    font-weight: 600;
+    display: block;
+    margin: 5px 0;
+}
+
+.heznek-download-file {
+    text-decoration: none;
+    color: #333;
+}
+
+.file-data {
+    margin: 10px 0 15px;
+    .data-header {
+        &.small {
+            font-size: 15px;
+            color: #3f51b5;
+        }
+    }
+}

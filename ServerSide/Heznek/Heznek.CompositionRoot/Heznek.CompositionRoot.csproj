@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Heznek.Common\Heznek.Common.csproj" />
+    <ProjectReference Include="..\Heznek.DataAccess\Heznek.DataAccess.csproj" />
+    <ProjectReference Include="..\Heznek.Services\Heznek.Services.csproj" />
+  </ItemGroup>
+
+</Project>

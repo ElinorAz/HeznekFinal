@@ -1,0 +1,61 @@
+<div class="heznek-page-wrapper">
+    <div *ngIf="isAdmin">
+        <app-statistic></app-statistic>
+    </div>
+
+    <div *ngIf="!isAdmin && userStatus === 'student'">
+         <app-telephony></app-telephony>
+    </div>
+
+    <div *ngIf="!isAdmin && userStatus === 'candidate'">
+        <div class="heznek-section-title">טפסי מועמד</div>
+
+        <div class="d-flex justify-center">
+            <mat-spinner *ngIf="isLoadingPage" [diameter]="20" class="spinner"></mat-spinner>
+        </div>
+        <div *ngIf="!isLoadingPage">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 content-table">
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef> </th>
+                    <td mat-cell *matCellDef="let element">
+                        <div class="action-buttons-container">
+                            <input type="file" hidden #file (change)="upload($event, element.id)" />
+                            <button *ngIf="!element.isForm" mat-button (click)="file.click()">
+                                <mat-icon>attach_file</mat-icon>
+                            </button>
+                            <mat-icon class="cursor-pointer" *ngIf="element.isForm" (click)="redirectTo(element.link)">edit</mat-icon>
+                        </div>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="task">
+                    <th mat-header-cell *matHeaderCellDef> משימה </th>
+                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </ng-container>
+                <ng-container matColumnDef="updated">
+                    <th mat-header-cell *matHeaderCellDef> זמן עדכון </th>
+                    <td mat-cell *matCellDef="let element"> {{element.updated}} </td>
+                </ng-container>
+                <ng-container matColumnDef="file">
+                    <th mat-header-cell *matHeaderCellDef> קובץ </th>
+                    <td mat-cell *matCellDef="let element">
+                        <span *ngIf="!isLoading[element.id]">{{element.fileName}}</span>
+                        <mat-spinner *ngIf="isLoading[element.id]" [diameter]="20" class="spinner"></mat-spinner>
+                    </td>
+                </ng-container>
+
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <div class="d-flex space-between align-center heznek-wrapper">
+                <div class="content-header no-offset">
+                    <button class="heznek-button" mat-button (click)="submit()">
+                        <div class="button-content">
+                            שליחה
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20180711132626_Initial.cs" />
+    <Compile Remove="Migrations\20180711133045_Initial.cs" />
+    <Compile Remove="Migrations\20180711133750_Initial.cs" />
+    <Compile Remove="Migrations\20180711135817_Initial.cs" />
+    <Compile Remove="Migrations\20181219095938_AddProfileEntities.cs" />
+    <Compile Remove="Migrations\20181219114806_AddProfileEntities.cs" />
+    <Compile Remove="Migrations\20181219120445_AddProfileEntities.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Heznek.Common\Heznek.Common.csproj" />
+  </ItemGroup>
+
+</Project>

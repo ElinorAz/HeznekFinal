@@ -1,0 +1,47 @@
+.heznek-form-status {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+    font-family: Roboto;
+    align-items: center;
+    .heznek-status {
+        text-align: center;
+        margin: 30px 0;
+        &.status-in-progress {
+
+        }
+        .heznek-status-name {
+            margin: 10px 0 10px;
+        }
+        .heznek-status-circle {
+            width: 100px;
+            height: 100px;
+            background: #e2dfdf;
+            border-radius: 50%;
+            margin: 7px 42px;
+            border: 3px solid #ccc;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .icon {
+                width: 50px;
+            }
+        }
+
+        &.declined {
+            
+            .heznek-status-circle {
+                background: rgb(223, 105, 105);
+                border: 3px solid #c51407;
+            }
+        }
+
+        &.active {
+            .heznek-status-circle {
+                background: #4b9c3e;
+                border: 3px solid #68b568;
+            }
+        }
+    }
+}

@@ -1,0 +1,43 @@
+<div class="heznek-page-wrapper">
+
+    <div class="heznek-section-title">טלפוניה</div>
+
+    <div class="heznek-telephony-wrap">
+        <div class="heznek-telephony-form">
+            <mat-form-field class="heznek-input field-full-width">
+                <input [formControl]="autoCompleteControl" type="text" placeholder="Search" aria-label="Search" matInput [matAutocomplete]="auto">
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" class="heznek-input field-full-width">
+                    <mat-option *ngFor="let candidate of candidatesAutoComplete$ | async; let index = index" [value]="candidate" (click)="editCandidate(candidate)">
+                        {{ candidate.firstName }} {{ candidate.lastName }}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+        </div>
+
+        <div class="heznek-telephony-events">
+            <div class="heznek-latest-event" *ngIf="latestEvent">
+                <span class="latest-event-label">הינך רשום ל<span class="value">{{latestEvent.name}}</span>ב
+                    <span class="value">
+                        {{latestEvent.date | date}} {{latestEvent.time}} <span *ngIf="latestEvent.finishTime"> - </span> {{latestEvent.finishTime}} </span>
+                </span>
+                <div class="" *ngIf="latestEvent.subject">
+                    <span>נושא </span>
+                    <span class="value">{{latestEvent.subject}}</span>
+                </div>
+                <div class="" *ngIf="latestEvent.location">
+                    <span>מיקום </span>
+                    <span class="value">{{latestEvent.location}}</span>
+                </div>
+            </div>
+
+            <div class="heznek-section-title small offset-bottom-15">הוזמנת ל</div>
+            <ul>
+                <li *ngFor="let event of attendedEvents">
+                    <span>{{event}}</span>
+                </li>
+            </ul>
+
+
+        </div>
+    </div>
+</div>
